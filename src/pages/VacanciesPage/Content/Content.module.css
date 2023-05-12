@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  width: 95%;
+  min-width: 315px;
+  max-width: 773px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    align-self: center;
+  }
+}

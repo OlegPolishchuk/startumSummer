@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+
+  gap:  28px;
+}
+
+.aside {
+
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .aside {
+    align-self: center;
+  }
+}

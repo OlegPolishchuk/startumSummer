@@ -1,14 +1,14 @@
 import { ComponentPropsWithRef, ReactNode } from 'react';
 
 import clsx from 'clsx';
+import { Button, SearchIcon } from 'ui';
 
 import cls from './SearcInput.module.css';
-
-import { SearchIcon } from 'shared/ui/Icons';
 
 interface Props extends ComponentPropsWithRef<'input'> {
   // buttonCallback: (value: string) => void;
   children?: ReactNode;
+  clickCallback: (value: string) => void;
 }
 export const SearchInput = ({
   // buttonCallback,
@@ -18,12 +18,16 @@ export const SearchInput = ({
   // placeholder,
   // onChange,
   // onKeyDown,
-  children,
+  clickCallback,
   ...restProps
 }: Props) => {
+  const handleClick = () => {
+    clickCallback('');
+  };
+
   return (
     <div className={cls.wrapper}>
-      <SearchIcon width={13} height={13} />
+      <SearchIcon className={cls.icon} width={13} height={13} />
 
       <input
         className={clsx(cls.input, className && className)}
@@ -34,7 +38,9 @@ export const SearchInput = ({
         {...restProps}
       />
 
-      {children}
+      <Button size="small" className={cls.button} onClick={handleClick}>
+        Search
+      </Button>
     </div>
   );
 };

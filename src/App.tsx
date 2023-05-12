@@ -1,14 +1,13 @@
 import './App.css';
-import { ROUTES } from 'constants';
 
-import { Routes, Route } from 'react-router-dom';
-
-import { MainPage } from 'pages';
+import { Header } from 'components';
+import { Outlet } from 'react-router-dom';
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path={ROUTES.main} element={<MainPage />} />
-    </Routes>
+    <>
+      <Header />
+      <Outlet />
+    </>
   );
 };

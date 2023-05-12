@@ -10,9 +10,12 @@
   border: 1px solid var(--color-border);
 
   background-color: var(--bg-color-item);
+
+  position: relative;
 }
 
 .input {
+  padding-left: 20px;
   border: 0;
   outline: none;
   background-color: transparent;
@@ -25,5 +28,13 @@
 }
 
 .icon {
+  position: absolute;
+  top: 18px;
+  left: 12px;
+}
 
+@media (max-width: 576px) {
+  .button {
+    padding: 5.5px 5px;
+  }
 }

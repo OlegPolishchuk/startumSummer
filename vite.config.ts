@@ -9,7 +9,7 @@ export default defineConfig({
       pages: '/src/pages',
       ui: '/src/shared/ui',
       constants: '/src/shared/constants',
-      components: '/src/components',
+      components: '/src/shared/components',
       router: '/src/router',
     },
   },

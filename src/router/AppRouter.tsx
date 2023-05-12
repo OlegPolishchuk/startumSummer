@@ -2,16 +2,18 @@ import { ROUTES } from 'constants';
 
 import { createBrowserRouter } from 'react-router-dom';
 
-import { Header } from 'components';
+import { App } from '../App';
+
+import { VacanciesPage } from 'pages';
 
 export const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Header />,
+    element: <App />,
     children: [
       {
         path: ROUTES.main,
-        element: <div>Vacancies</div>,
+        element: <VacanciesPage />,
       },
       {
         path: ROUTES.favorites,

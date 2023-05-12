@@ -23,7 +23,7 @@
       "ui": ["shared/ui"],
       "constants": ["shared/constants"],
       "pages": ["pages"],
-      "components": ["components"],
+      "components": ["shared/components"],
       "router": ["router"]
     }
   },
