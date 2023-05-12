@@ -1,0 +1,56 @@
+.card {
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.title a {
+  color: var(--color-theme);
+
+  text-decoration: none;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.salary {
+  font-weight: 600;
+}
+
+.dot {
+  display: inline-block;
+
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+
+  background-color: var(--color-gray);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.city {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}

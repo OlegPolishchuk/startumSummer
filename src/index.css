@@ -1,0 +1,53 @@
+@import "normalize-css";
+
+:root {
+  --bg-bolor-main: #F7F7F8;
+  --bg-color-item: #fff;
+
+  --color-blue-main: #5E96FC;
+  --color-black: #232134;
+  --color-gray: #ACADB9;
+
+  --color-theme: var(--color-blue-main);
+  --color-text-main: var(--color-black);
+  --color-text-second: var(--color-gray);
+  --color-text-button: #fff;
+  --color-border:  #EAEBED;
+
+  --border-radius-main: 12px;
+  --border-radius-second: 8px;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1,h2,h3,h4,h5,p,ul {
+  margin: 0;
+}
+
+ul { list-style: none }
+
+body {
+  min-height: 100vh;
+  padding-bottom: 40px;
+
+  background-color: var(--bg-bolor-main);
+}
+
+.container {
+  width: 95%;
+  max-width: 1116px;
+
+  margin: 0 auto;
+}
+
+.wrapper {
+  padding: 20px;
+  background-color: var(--bg-color-item);
+  border-radius: var(--border-radius-main);
+}

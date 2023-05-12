@@ -1,0 +1,12 @@
+.star {
+  cursor: pointer;
+  stroke: var(--color-gray);
+  stroke-width: 1.5;
+
+  transition: .2s ease;
+}
+
+.active {
+  stroke: var(--color-theme);
+  fill: var(--color-theme);
+}

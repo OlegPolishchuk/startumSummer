@@ -1,7 +1,14 @@
 import './App.css';
+import { ROUTES } from 'constants';
 
-const App = () => {
-  return <div />;
+import { Routes, Route } from 'react-router-dom';
+
+import { MainPage } from 'pages';
+
+export const App = () => {
+  return (
+    <Routes>
+      <Route path={ROUTES.main} element={<MainPage />} />
+    </Routes>
+  );
 };
-
-export default App;

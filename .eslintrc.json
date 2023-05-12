@@ -99,6 +99,7 @@
       ]
     }],
     "react/display-name": "off",
+    "react/button-has-type": "off",
     "react/prop-types": "off",
     "react/no-array-index-key": "off",
     "react/react-in-jsx-scope": "off",
