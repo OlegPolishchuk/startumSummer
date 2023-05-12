@@ -1,0 +1,31 @@
+.nav {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+.link {
+  text-decoration: none;
+  transition: .2s ease;
+}
+
+.link:hover {
+  color: var(--color-theme);
+}
+
+.link:active,
+.link:visited {
+  color: var(--color-text-main);
+}
+
+.link.active {
+  color: var(--color-theme);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    gap: 20px;
+  }
+}

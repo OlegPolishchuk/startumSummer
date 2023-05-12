@@ -1,0 +1,19 @@
+.header {
+  padding: 24px 0;
+  background-color: var(--bg-color-item);
+
+  margin-bottom: 40px;
+}
+
+.header_container {
+  display: flex;
+
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .header_container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
