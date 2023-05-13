@@ -1,60 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
 import { API } from 'api/API';
-import { Vacancy } from 'api/types';
-
-interface Data {
-  vacanciesData: {
-    vacancies: Vacancy[];
-    total: number;
-  };
-  loading: boolean;
-  isError: boolean;
-  error: any;
-}
+import { useFetchVacancies } from 'hooks/useFechVacancies/useFetchVacancies';
+import { localStorageService } from 'services';
 
 export const useInitializeApp = () => {
-  const [data, setData] = useState<Data>({
-    vacanciesData: { total: 0, vacancies: [] },
-    loading: true,
-    isError: false,
-    error: null,
-  });
+  const { fetchVacancies, vacancies, isError, error, total, loading } =
+    useFetchVacancies();
 
   const [searchParams] = useSearchParams();
-  const pageParam = searchParams.get('page') || '';
+  const pageParam = searchParams.get('page') || 1;
 
   useEffect(() => {
-    API.authUser().then(() => {
-      const page = +pageParam || 1;
+    const isUserAuth = localStorageService.getAuthData();
 
-      API.getVacancies({ page })
-        .then(res => {
-          setData(prevState => ({
-            ...prevState,
-            loading: false,
-            vacanciesData: { vacancies: res.data.objects, total: res.data.total },
-            total: res.data.total,
-          }));
-        })
-        .catch(error => {
-          setData(prevState => ({
-            ...prevState,
-            loading: false,
-            isError: true,
-            // error: error?.message || error,
-            error,
-          }));
-        });
-    });
+    (async () => {
+      if (!isUserAuth) {
+        try {
+          await API.authUser();
+        } catch (e) {
+          throw new Error('Error! Проблема в API.authUser()');
+        }
+      }
+      await fetchVacancies({ page: +pageParam });
+    })();
   }, []);
 
   return {
-    vacanciesData: data.vacanciesData,
-    loading: data.loading,
-    isError: data.isError,
-    error: data.error,
+    vacancies,
+    loading,
+    isError,
+    error,
+    total,
   };
 };

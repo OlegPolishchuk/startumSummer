@@ -29,6 +29,7 @@
       "services": ["services"],
       "context": ["context"],
       "hooks": ["hooks"],
+      "utils": ["shared/utils"]
     }
   },
   "include": ["src"],

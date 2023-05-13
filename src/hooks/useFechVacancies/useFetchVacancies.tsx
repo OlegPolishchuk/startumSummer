@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { errorSetter } from 'utils';
+
 import { API } from 'api/API';
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
 
@@ -31,34 +33,8 @@ export const useFetchVacancies = () => {
         vacanciesData: { total, vacancies: objects },
       }));
     } catch (e) {
-      setData(prevState => ({
-        ...prevState,
-        loading: false,
-        isError: true,
-        // error: error?.message || error,
-        error,
-      }));
+      errorSetter(setData, e);
     }
-
-    // API.getVacancies(filterParams)
-    //   .then(res => {
-    //     const { total, objects } = res.data;
-    //
-    //     setData(prevState => ({
-    //       ...prevState,
-    //       loading: false,
-    //       vacanciesData: { total, vacancies: objects },
-    //     }));
-    //   })
-    //   .catch(error => {
-    //     setData(prevState => ({
-    //       ...prevState,
-    //       loading: false,
-    //       isError: true,
-    //       // error: error?.message || error,
-    //       error,
-    //     }));
-    //   });
   };
 
   const { vacanciesData, isError, error, loading } = data;

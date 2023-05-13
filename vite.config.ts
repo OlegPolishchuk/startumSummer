@@ -15,6 +15,7 @@ export default defineConfig({
       services: '/src/services',
       context: '/src/context',
       hooks: '/src/hooks',
+      utils: '/src/shared/utils',
     },
   },
 });
