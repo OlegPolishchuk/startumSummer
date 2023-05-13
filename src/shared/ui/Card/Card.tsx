@@ -5,14 +5,27 @@ import { Description } from './Description/Description';
 import { Header } from './Header/Header';
 import { Location } from './Location/Location';
 
-export const Card = () => {
+import { Vacancy } from 'api/types';
+
+interface Props {
+  card: Vacancy;
+}
+
+export const Card = ({ card }: Props) => {
+  const { currency, payment_to, payment_from, town, type_of_work, profession } = card;
+
   return (
     <div className={clsx(cls.card, 'wrapper')}>
-      <Header />
+      <Header profession={profession} isFavorite={false} />
 
-      <Description />
+      <Description
+        currency={currency}
+        payment_from={payment_from}
+        payment_to={payment_to}
+        type_of_work={type_of_work.title}
+      />
 
-      <Location />
+      <Location location={town.title} />
     </div>
   );
 };

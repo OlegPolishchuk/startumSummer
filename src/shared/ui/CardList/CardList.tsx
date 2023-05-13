@@ -2,18 +2,17 @@ import { Card } from 'ui';
 
 import cls from './CardList.module.css';
 
+import { Vacancy } from 'api/types';
+
 interface Props {
-  cards: any[];
+  cards: Vacancy[];
 }
 export const CardList = ({ cards }: Props) => {
-  console.log(cards);
-
   return (
     <div className={cls.container}>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {cards.map(card => (
+        <Card key={card.id} card={card} />
+      ))}
     </div>
   );
 };

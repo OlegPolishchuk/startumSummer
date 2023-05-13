@@ -11,6 +11,10 @@ export default defineConfig({
       constants: '/src/shared/constants',
       components: '/src/shared/components',
       router: '/src/router',
+      api: '/src/api',
+      services: '/src/services',
+      context: '/src/context',
+      hooks: '/src/hooks',
     },
   },
 });

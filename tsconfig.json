@@ -24,7 +24,11 @@
       "constants": ["shared/constants"],
       "pages": ["pages"],
       "components": ["shared/components"],
-      "router": ["router"]
+      "router": ["router"],
+      "api/*": ["api/*"],
+      "services": ["services"],
+      "context": ["context"],
+      "hooks": ["hooks"],
     }
   },
   "include": ["src"],

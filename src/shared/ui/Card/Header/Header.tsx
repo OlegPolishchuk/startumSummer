@@ -3,13 +3,17 @@ import { Star } from 'ui';
 
 import cls from '../Card.module.css';
 
-export const Header = () => {
+interface Props {
+  profession: string;
+  isFavorite: boolean;
+}
+export const Header = ({ profession, isFavorite }: Props) => {
   return (
     <div className={cls.header}>
       <h3 className={cls.title}>
-        <Link to="/">Менеджер-дизайнер</Link>
+        <Link to="/">{profession}</Link>
       </h3>
-      <Star isActive={false} />
+      <Star isActive={isFavorite} />
     </div>
   );
 };

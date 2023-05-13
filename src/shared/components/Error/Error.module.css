@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 30px;
+
+  text-align: center;
+}
+
+.errorMessage {
+  font-weight: 400;
+}
+
+.error {
+  word-break: break-all;
+}
