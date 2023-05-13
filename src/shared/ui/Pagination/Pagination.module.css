@@ -34,11 +34,10 @@
   color: #fff;
 }
 
-.prevNext {
-
-}
 
 .disabled {
+  /*pointer-events: none;*/
+
   border-color: var(--color-gray-500);
   color: var(--color-gray-500);
   cursor: not-allowed;

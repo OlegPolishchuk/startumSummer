@@ -1,1 +1,2 @@
-export { useInitializeApp } from 'hooks/useGetVacancies/useInitializeApp';
+export { useInitializeApp } from './useGetVacancies/useInitializeApp';
+export { usePageSearchParam } from './usePageSearchParam/usePageSearchParam';

@@ -4,8 +4,10 @@ import { API } from 'api/API';
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
 
 interface Data {
-  vacancies: Vacancy[];
-  total: number;
+  vacanciesData: {
+    vacancies: Vacancy[];
+    total: number;
+  };
   loading: boolean;
   isError: boolean;
   error: any;
@@ -13,8 +15,7 @@ interface Data {
 
 export const useInitializeApp = () => {
   const [data, setData] = useState<Data>({
-    vacancies: [],
-    total: 0,
+    vacanciesData: { total: 0, vacancies: [] },
     loading: true,
     isError: false,
     error: null,
@@ -27,7 +28,7 @@ export const useInitializeApp = () => {
           setData(prevState => ({
             ...prevState,
             loading: false,
-            vacancies: res.data.objects,
+            vacanciesData: { vacancies: res.data.objects, total: res.data.total },
             total: res.data.total,
           }));
         })
@@ -43,7 +44,7 @@ export const useInitializeApp = () => {
   }, []);
 
   return {
-    vacancies: data.vacancies,
+    vacanciesData: data.vacanciesData,
     loading: data.loading,
     isError: data.isError,
     error: data.error,

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Star } from 'ui';
+import { SaveButton } from 'ui';
 
 import cls from '../Card.module.css';
 
@@ -14,7 +14,7 @@ export const Header = ({ profession, isFavorite }: Props) => {
         <Link to="/">{profession}</Link>
       </h3>
       <div className={cls.starButton}>
-        <Star isActive={isFavorite} />
+        <SaveButton isActive={isFavorite} />
       </div>
     </div>
   );

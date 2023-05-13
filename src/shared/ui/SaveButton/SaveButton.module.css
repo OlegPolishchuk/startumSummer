@@ -6,6 +6,10 @@
   transition: .2s ease;
 }
 
+.star:hover {
+  stroke: var(--color-blue-500);
+}
+
 .active {
   stroke: var(--color-theme);
   fill: var(--color-theme);

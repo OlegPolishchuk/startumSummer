@@ -2,12 +2,12 @@ import { ComponentPropsWithRef, MouseEvent } from 'react';
 
 import clsx from 'clsx';
 
-import cls from './Star.module.css';
+import cls from './SaveButton.module.css';
 
 interface Props extends ComponentPropsWithRef<'svg'> {
   isActive: boolean;
 }
-export const Star = ({ className, isActive, onClick, ...restProps }: Props) => {
+export const SaveButton = ({ className, isActive, onClick, ...restProps }: Props) => {
   const handleClick = (event: MouseEvent<SVGSVGElement>) => {
     onClick && onClick(event);
   };

@@ -1,15 +1,28 @@
-import { createContext, useContext } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 import { Vacancy } from 'api/types';
 
-export const VacanciesContext = createContext<Vacancy[]>([]);
+interface VacanciesContextData {
+  vacancies: Vacancy[];
+  total: number;
+}
+export const VacanciesContext = createContext<VacanciesContextData>({
+  vacancies: [],
+  total: 0,
+});
 
 export const useVacancies = () => {
-  const vacanciesContext = useContext(VacanciesContext);
+  const { vacancies, total } = useContext(VacanciesContext);
+  const [newVacancies, setNewVacancies] = useState<Vacancy[]>(vacancies);
 
-  if (!vacanciesContext) {
-    throw new Error('vacanciesContext is null');
-  }
+  const setVacancies = useCallback(
+    (vacancies: Vacancy[]) => setNewVacancies(vacancies),
+    [],
+  );
 
-  return vacanciesContext;
+  useEffect(() => {
+    setNewVacancies(vacancies);
+  }, [vacancies]);
+
+  return { vacancies: newVacancies, total, setVacancies };
 };

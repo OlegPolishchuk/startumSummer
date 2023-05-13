@@ -1,0 +1,44 @@
+.filters {
+  width: 315px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.resetButton {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.resetButtonIcon {
+  stroke: var(--color-gray-500);
+}
+
+.resetButton:hover .resetButtonIcon {
+  background-color: transparent;
+  stroke: var(--color-blue-400)
+}
+
+.resetButton:active .resetButtonIcon {
+  background-color: transparent;
+  stroke: var(--color-blue-600)
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

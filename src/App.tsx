@@ -7,10 +7,12 @@ import { VacanciesContext } from 'context';
 import { useInitializeApp } from 'hooks';
 
 export const App = () => {
-  const { loading, vacancies, isError, error } = useInitializeApp();
+  const { loading, vacanciesData, isError, error } = useInitializeApp();
+
+  console.log(vacanciesData);
 
   return (
-    <VacanciesContext.Provider value={vacancies}>
+    <VacanciesContext.Provider value={vacanciesData}>
       {loading && <GlobalLoader />}
 
       <Header />
