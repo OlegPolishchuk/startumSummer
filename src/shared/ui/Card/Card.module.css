@@ -15,6 +15,13 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
+
+  margin-right: auto;
+}
+
+.starButton {
+  width: 22px;
+  height: 20px;
 }
 
 .title a {
@@ -53,4 +60,39 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+}
+
+@media (max-width: 567px) {
+  .description {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dot {
+    display: none;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .title {
+    order: 2;
+  }
+
+  .starButton {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .description {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dot {
+    display: none;
+  }
 }

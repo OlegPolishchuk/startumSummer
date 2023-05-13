@@ -17,7 +17,7 @@ export const Description = ({
 
   return (
     <div className={cls.description}>
-      {!!payment && <p>з/п {payment}</p>}
+      {!!payment && <p className={cls.salary}>з/п {payment}</p>}
       <p className={cls.dot} />
       <p className={cls.workTime}>{type_of_work}</p>
     </div>

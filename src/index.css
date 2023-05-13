@@ -16,6 +16,11 @@
 
   --border-radius-main: 12px;
   --border-radius-second: 8px;
+
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1200px;
 }
 
 html {

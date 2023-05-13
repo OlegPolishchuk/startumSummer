@@ -13,7 +13,9 @@ export const Header = ({ profession, isFavorite }: Props) => {
       <h3 className={cls.title}>
         <Link to="/">{profession}</Link>
       </h3>
-      <Star isActive={isFavorite} />
+      <div className={cls.starButton}>
+        <Star isActive={isFavorite} />
+      </div>
     </div>
   );
 };
