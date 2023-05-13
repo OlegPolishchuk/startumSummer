@@ -1,3 +1,6 @@
+import { useEffect, useRef } from 'react';
+
+import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 import { CardList, Pagination } from 'ui';
 
 import { SearchBar } from '../SearchBar/SearchBar';
@@ -9,22 +12,29 @@ import { useFetchVacancies, usePageSearchParam } from 'hooks';
 
 export const Content = () => {
   const { page, setPageSearchParams } = usePageSearchParam();
-  const { vacancies, total } = useVacancies();
-
+  const { vacancies, total, setVacancies } = useVacancies();
   const { fetchVacancies, vacancies: newVacancies } = useFetchVacancies();
 
-  console.log(`vacancies in Content => `, vacancies);
+  const progressRef = useRef<LoadingBarRef>(null);
 
-  const handleClick = (nextPage: number) => {
+  const handleClick = async (nextPage: number) => {
     setPageSearchParams(nextPage);
+    progressRef.current?.continuousStart();
 
-    fetchVacancies({ page: nextPage });
+    await fetchVacancies({ page: nextPage });
+    progressRef?.current?.complete();
   };
 
-  console.log('newVacancies = ', newVacancies);
+  useEffect(() => {
+    if (newVacancies) {
+      setVacancies(newVacancies);
+    }
+  }, [newVacancies]);
 
   return (
     <main className={cls.main}>
+      <LoadingBar color="#5E96FC" ref={progressRef} />
+
       <SearchBar />
 
       <CardList cards={vacancies} />
