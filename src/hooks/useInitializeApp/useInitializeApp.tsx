@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import { API } from 'api/API';
-import { VacanciesRequestFilterData, Vacancy } from 'api/types';
+import { Vacancy } from 'api/types';
 
 interface Data {
   vacanciesData: {
@@ -21,9 +23,14 @@ export const useInitializeApp = () => {
     error: null,
   });
 
+  const [searchParams] = useSearchParams();
+  const pageParam = searchParams.get('page') || '';
+
   useEffect(() => {
     API.authUser().then(() => {
-      API.getVacancies({} as VacanciesRequestFilterData)
+      const page = +pageParam || 1;
+
+      API.getVacancies({ page })
         .then(res => {
           setData(prevState => ({
             ...prevState,
@@ -37,7 +44,8 @@ export const useInitializeApp = () => {
             ...prevState,
             loading: false,
             isError: true,
-            error: error?.message || error,
+            // error: error?.message || error,
+            error,
           }));
         });
     });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -8,11 +8,11 @@ export const usePageSearchParam = (startPage = 1) => {
 
   const currentPage = searchParams.get('page');
 
-  const setPageSearchParams = (nextPage: number) => {
+  const setPageSearchParams = useCallback((nextPage: number) => {
     searchParams.set('page', `${nextPage}`);
 
     setSearchParams(searchParams);
-  };
+  }, []);
 
   useEffect(() => {
     if (currentPage) {
