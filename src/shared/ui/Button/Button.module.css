@@ -29,5 +29,5 @@
 .link {
   padding: 0;
   background-color: transparent;
-  color: var(--color-gray);
+  color: var(--color-gray-500);
 }

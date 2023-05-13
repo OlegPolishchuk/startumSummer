@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef, ReactNode } from 'react';
 
 import clsx from 'clsx';
-import { Button, SearchIcon } from 'ui';
+import { Button, Input, SearchIcon } from 'ui';
 
 import cls from './SearcInput.module.css';
 
@@ -29,7 +29,7 @@ export const SearchInput = ({
     <div className={cls.wrapper}>
       <SearchIcon className={cls.icon} width={13} height={13} />
 
-      <input
+      <Input
         className={clsx(cls.input, className && className)}
         value={value}
         disabled={disabled}

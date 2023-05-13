@@ -4,7 +4,7 @@
   align-items: center;
   gap: 10px;
 
-  padding: 8px 12px;
+  padding: 0 12px;
 
   border-radius: var(--border-radius-second);
   border: 1px solid var(--color-border);
@@ -12,10 +12,16 @@
   background-color: var(--bg-color-item);
 
   position: relative;
+
+  transition: .2s ease;
+}
+
+.wrapper:hover {
+  border-color: var(--color-theme);
 }
 
 .input {
-  padding-left: 20px;
+  padding: 14px 0 14px 20px;
   border: 0;
   outline: none;
   background-color: transparent;
@@ -23,8 +29,12 @@
   flex-grow: 2;
 }
 
+.input label {
+  gap: 0;
+}
+
 .input::placeholder {
-  color: var(--color-gray);
+  color: var(--color-gray-500);
 }
 
 .icon {

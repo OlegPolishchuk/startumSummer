@@ -22,7 +22,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     return (
-      <label className={cls.container}>
+      <label className={clsx(cls.container, label && cls.gap)}>
         <span className={cls.label}>{label}</span>
 
         <input

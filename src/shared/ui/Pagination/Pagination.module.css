@@ -39,11 +39,11 @@
 }
 
 .disabled {
-  border-color: var(--color-gray);
-  color: var(--color-gray);
+  border-color: var(--color-gray-500);
+  color: var(--color-gray-500);
   cursor: not-allowed;
 }
 
 .disabled:hover {
-  border-color: var(--color-gray);
+  border-color: var(--color-gray-500);
 }
