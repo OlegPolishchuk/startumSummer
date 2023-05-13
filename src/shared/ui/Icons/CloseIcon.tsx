@@ -15,7 +15,7 @@ export const CloseIcon = (props: ComponentPropsWithRef<'svg'>) => {
         y1="4.44219"
         x2="4.44197"
         y2="11.7427"
-        stroke="#ACADB9"
+        // stroke="#ACADB9"
         strokeWidth="1.25"
       />
       <line
@@ -23,7 +23,7 @@ export const CloseIcon = (props: ComponentPropsWithRef<'svg'>) => {
         y1="11.7425"
         x2="4.60082"
         y2="4.44197"
-        stroke="#ACADB9"
+        // stroke="#ACADB9"
         strokeWidth="1.25"
       />
     </svg>

@@ -16,6 +16,16 @@
 
   border: none;
   outline: none;
+
+  transition: .2s ease;
+}
+
+.button:hover {
+  background-color: var(--color-blue-400);
+}
+
+.button:active {
+  background-color: var(--color-blue-600);
 }
 
 .small {
@@ -26,8 +36,18 @@
   width: 100%;
 }
 
-.link {
+.textButton {
   padding: 0;
   background-color: transparent;
   color: var(--color-gray-500);
+}
+
+.textButton:hover {
+  background-color: transparent;
+  color: var(--color-blue-400)
+}
+
+.textButton:active {
+  background-color: transparent;
+  color: var(--color-blue-600)
 }

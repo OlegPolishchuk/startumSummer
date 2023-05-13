@@ -7,7 +7,7 @@ import cls from './Button.module.css';
 interface Props extends ComponentPropsWithRef<'button'> {
   full?: boolean;
   size?: 'small' | 'default';
-  variant?: 'filled' | 'link';
+  variant?: 'primary' | 'text';
 }
 export const Button = forwardRef<HTMLButtonElement, Props>(
   (
@@ -19,7 +19,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
       onClick,
       type,
       size = 'default',
-      variant = 'filled',
+      variant = 'primary',
       ...restProps
     }: Props,
     ref,
@@ -28,7 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
       cls.button,
       full && cls.full,
       size === 'small' && cls.small,
-      variant === 'link' && cls.link,
+      variant === 'text' && cls.textButton,
       className && className,
     );
 
