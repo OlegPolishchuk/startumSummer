@@ -7,3 +7,4 @@ export { CardList } from './CardList/CardList';
 export { Pagination } from './Pagination/Pagination';
 export { PointerIcon, CloseIcon, SearchIcon } from './Icons';
 export { Loader } from './Loader/Loader';
+export { CustomSelect } from './CustomSelect/CustomSelect';

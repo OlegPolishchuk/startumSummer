@@ -1,11 +1,18 @@
-import { Button, Input } from 'ui';
+import { Button, CustomSelect, Input } from 'ui';
 
 import cls from '../Filters.module.css';
 
-export const FiltersForm = () => {
+interface Props {
+  options: {
+    label: string;
+    value: string | number;
+  }[];
+}
+
+export const FiltersForm = ({ options }: Props) => {
   return (
     <form className={cls.form}>
-      <Input label="Отрасль" placeholder="Выберете отрасль" />
+      <CustomSelect label="Отрасль" options={options} />
 
       <div>
         <Input label="Оклад" placeholder="От" type="number" />
