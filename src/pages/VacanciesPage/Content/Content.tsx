@@ -7,13 +7,13 @@ import { SearchBar } from '../SearchBar/SearchBar';
 
 import cls from './Content.module.css';
 
-import { useVacancies } from 'context';
-import { useFetchVacancies, usePageSearchParam } from 'hooks';
+import { useFetchVacancies, useFilterSearchParam, usePageSearchParam } from 'hooks';
+import { NoContent } from 'pages/VacanciesPage/Content/NoContent/NoContent';
 
 export const Content = () => {
+  const { fetchVacancies, vacancies, loading, total } = useFetchVacancies();
   const { page, setPageSearchParams } = usePageSearchParam();
-  const { vacancies, total, setVacancies } = useVacancies();
-  const { fetchVacancies, vacancies: newVacancies } = useFetchVacancies();
+  const [keyword] = useFilterSearchParam('keyword');
 
   const progressRef = useRef<LoadingBarRef>(null);
 
@@ -26,18 +26,22 @@ export const Content = () => {
   };
 
   useEffect(() => {
-    if (newVacancies) {
-      setVacancies(newVacancies);
-    }
-  }, [newVacancies]);
+    (async () => {
+      await fetchVacancies({ page, keyword });
+    })();
+  }, []);
 
   return (
     <main className={cls.main}>
       <LoadingBar color="#5E96FC" ref={progressRef} />
 
-      <SearchBar />
+      <SearchBar disabled={loading} fetchVacancies={fetchVacancies} />
 
-      <CardList cards={vacancies} />
+      {vacancies.length === 0 && !loading ? (
+        <NoContent />
+      ) : (
+        <CardList cards={vacancies} isLoading={loading} />
+      )}
 
       <Pagination pageCount={total} currentPage={page - 1} onPageClick={handleClick} />
     </main>

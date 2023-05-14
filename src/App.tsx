@@ -1,24 +1,33 @@
 import './App.css';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Error, GlobalLoader, Header } from 'components';
 import { Outlet } from 'react-router-dom';
 
-import { VacanciesContext } from 'context';
+import { AppContext } from 'context';
 import { useInitializeApp } from 'hooks';
 
 export const App = () => {
-  const { loading, vacancies, total, isError, error } = useInitializeApp();
-  const contextData = useMemo(() => ({ vacancies, total }), [vacancies, total]);
+  const { loading, error, isInitialized } = useInitializeApp();
+  const [favorites, setFavorites] = useState([]);
+
+  const contextData = useMemo(
+    () => ({
+      isInitialized,
+      favoriteVacancies: favorites,
+      setFavoritesVacancies: () => setFavorites(favorites),
+    }),
+    [isInitialized],
+  );
 
   return (
-    <VacanciesContext.Provider value={contextData}>
+    <AppContext.Provider value={contextData}>
       {loading && <GlobalLoader />}
 
       <Header />
 
-      {isError ? <Error error={error && error} /> : <Outlet />}
-    </VacanciesContext.Provider>
+      {error ? <Error error={error && error} /> : <Outlet />}
+    </AppContext.Provider>
   );
 };

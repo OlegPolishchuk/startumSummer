@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
-
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import { API } from 'api/API';
-import { useFetchVacancies } from 'hooks/useFechVacancies/useFetchVacancies';
 import { localStorageService } from 'services';
 
+interface Data {
+  loading: boolean;
+  isInitialized: boolean;
+  error: any;
+}
 export const useInitializeApp = () => {
-  const { fetchVacancies, vacancies, isError, error, total, loading } =
-    useFetchVacancies();
-
-  const [searchParams] = useSearchParams();
-  const pageParam = searchParams.get('page') || 1;
+  const [data, setData] = useState<Data>({
+    loading: true,
+    isInitialized: false,
+    error: null,
+  });
 
   useEffect(() => {
     const isUserAuth = localStorageService.getAuthData();
@@ -19,20 +21,30 @@ export const useInitializeApp = () => {
     (async () => {
       if (!isUserAuth) {
         try {
-          await API.authUser();
+          const res = await API.authUser();
+
+          await localStorageService.setAuthData(res.data);
         } catch (e) {
+          setData(prevState => ({
+            ...prevState,
+            loading: false,
+            error: e,
+          }));
           throw new Error('Error! Проблема в API.authUser()');
         }
       }
-      await fetchVacancies({ page: +pageParam });
+
+      setData(prevState => ({
+        ...prevState,
+        loading: false,
+        isInitialized: true,
+      }));
     })();
   }, []);
 
   return {
-    vacancies,
-    loading,
-    isError,
-    error,
-    total,
+    loading: data.loading,
+    isInitialized: data.isInitialized,
+    error: data.error,
   };
 };

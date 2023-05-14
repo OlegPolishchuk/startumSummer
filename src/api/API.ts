@@ -1,5 +1,10 @@
 import { instance } from 'api/instance';
-import { AuthUserResponse, VacanciesRequestFilterData, VacancyResponse } from 'api/types';
+import {
+  AuthUserResponse,
+  Profession,
+  VacanciesRequestFilterData,
+  VacancyResponse,
+} from 'api/types';
 
 const login = import.meta.env.VITE_LOGIN;
 const password = import.meta.env.VITE_PASSWORD;
@@ -9,7 +14,7 @@ const hr = import.meta.env.VITE_HR;
 
 export const API = {
   authUser() {
-    return instance.get<AuthUserResponse>(`password/`, {
+    return instance.get<AuthUserResponse>(`oauth2/password/`, {
       params: {
         login,
         password,
@@ -30,6 +35,6 @@ export const API = {
   },
 
   getProfessionCatalogues() {
-    return instance.get(`catalogues/`);
+    return instance.get<Profession[]>(`catalogues`);
   },
 };

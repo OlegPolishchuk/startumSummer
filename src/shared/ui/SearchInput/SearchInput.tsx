@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ReactNode } from 'react';
+import { ComponentPropsWithRef, KeyboardEvent, ReactNode, useRef } from 'react';
 
 import clsx from 'clsx';
 import { Button, Input, SearchIcon } from 'ui';
@@ -6,23 +6,33 @@ import { Button, Input, SearchIcon } from 'ui';
 import cls from './SearcInput.module.css';
 
 interface Props extends ComponentPropsWithRef<'input'> {
-  // buttonCallback: (value: string) => void;
   children?: ReactNode;
   clickCallback: (value: string) => void;
 }
 export const SearchInput = ({
-  // buttonCallback,
   className,
   disabled,
   value,
-  // placeholder,
-  // onChange,
-  // onKeyDown,
+  defaultValue,
   clickCallback,
   ...restProps
 }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleClick = () => {
-    clickCallback('');
+    const inputValue = inputRef.current!.value.trim();
+
+    clickCallback(inputValue);
+
+    if (!inputValue) {
+      inputRef.current!.value = '';
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleClick();
+    }
   };
 
   return (
@@ -30,12 +40,15 @@ export const SearchInput = ({
       <SearchIcon className={cls.icon} width={13} height={13} />
 
       <Input
+        {...restProps}
         className={clsx(cls.input, className && className)}
+        ref={inputRef}
         value={value}
         disabled={disabled}
+        defaultValue={defaultValue}
         type="text"
+        onKeyDown={handleKeyDown}
         placeholder="Введите название вакансии"
-        {...restProps}
       />
 
       <Button size="small" className={cls.button} onClick={handleClick}>

@@ -30,3 +30,9 @@ export interface Vacancy {
   payment_from: number;
   currency: string;
 }
+
+export interface Profession {
+  title: string;
+  title_trimmed: string;
+  key: number;
+}

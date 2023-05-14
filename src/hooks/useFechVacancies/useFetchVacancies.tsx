@@ -11,18 +11,17 @@ interface Data {
     total: number;
   };
   loading: boolean;
-  isError: boolean;
   error: any;
 }
 export const useFetchVacancies = () => {
   const [data, setData] = useState<Data>({
     vacanciesData: { total: 0, vacancies: [] },
     loading: true,
-    isError: false,
     error: null,
   });
 
   const fetchVacancies = async (filterParams: VacanciesRequestFilterData) => {
+    setData(prevState => ({ ...prevState, loading: true }));
     try {
       const { data } = await API.getVacancies(filterParams);
       const { total, objects } = data;
@@ -37,13 +36,12 @@ export const useFetchVacancies = () => {
     }
   };
 
-  const { vacanciesData, isError, error, loading } = data;
+  const { vacanciesData, error, loading } = data;
 
   return {
     vacancies: vacanciesData.vacancies,
     total: vacanciesData.total,
     error,
-    isError,
     loading,
     fetchVacancies,
   };
