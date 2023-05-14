@@ -13,6 +13,7 @@ export interface VacanciesRequestFilterData {
   payment_to?: number;
   page?: number;
   count?: number;
+  catalogues?: number;
 }
 
 export interface VacancyResponse {
