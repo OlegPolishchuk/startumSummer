@@ -15,6 +15,7 @@ export const VacanciesPage = () => {
       <aside className={cls.aside}>
         <Filters callback={fetchVacancies} />
       </aside>
+
       <Content {...vacanciesData} />
     </div>
   );

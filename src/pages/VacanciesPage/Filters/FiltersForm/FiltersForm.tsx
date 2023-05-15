@@ -52,7 +52,7 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
 
       <CustomSelect ref={selectRef} label="Отрасль" options={options} />
 
-      <div>
+      <div className={cls.inputGroup}>
         <Input
           ref={paymentFromRef}
           label="Оклад"
