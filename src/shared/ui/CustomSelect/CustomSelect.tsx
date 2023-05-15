@@ -21,6 +21,7 @@ export const CustomSelect = forwardRef<Select<Option>, Props>(
 
         <Select
           ref={ref}
+          defaultValue={undefined}
           placeholder="Выберете отрасль"
           options={options}
           className={cls.select}

@@ -10,7 +10,7 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import cls from './Content.module.css';
 
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
-import { useFilterSearchParam, usePageSearchParam } from 'hooks';
+import { useGetFiltersSearchParams, usePageSearchParam } from 'hooks';
 import { NoContent } from 'pages/VacanciesPage/Content/NoContent/NoContent';
 
 interface Props {
@@ -21,8 +21,9 @@ interface Props {
 }
 
 export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) => {
+  const searchFiltersParams = useGetFiltersSearchParams();
+
   const { page, setPageSearchParams } = usePageSearchParam();
-  const [keyword] = useFilterSearchParam('keyword');
 
   const progressRef = useRef<LoadingBarRef>(null);
 
@@ -38,7 +39,7 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
 
   useEffect(() => {
     (async () => {
-      await fetchVacancies({ page, keyword });
+      await fetchVacancies({ ...searchFiltersParams });
     })();
   }, []);
 

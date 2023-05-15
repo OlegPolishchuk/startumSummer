@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
+import { useLocation } from 'react-router-dom';
 
 import cls from './Filters.module.css';
 import { FiltersForm } from './FiltersForm/FiltersForm';
 
 import { API } from 'api/API';
 import { VacanciesRequestFilterData } from 'api/types';
+import { useWrapSearchParams } from 'hooks';
 import { Catalog } from 'pages/VacanciesPage/types';
 
 interface Props {
@@ -15,9 +17,18 @@ interface Props {
 
 export const Filters = ({ callback }: Props) => {
   const [catalog, setCatalog] = useState<Catalog[]>([]);
+  const wrapSearchParams = useWrapSearchParams();
+
+  const currentQueryString = useLocation().search;
 
   const handleFormCallback = (formData: VacanciesRequestFilterData) => {
-    callback(formData);
+    const { filters, queryString } = wrapSearchParams(formData);
+
+    console.log('queryString =', queryString);
+    console.log(`currentQueryString =`, currentQueryString);
+    if (currentQueryString !== queryString) {
+      callback(filters);
+    }
   };
 
   useEffect(() => {

@@ -1,3 +1,6 @@
+import { ROUTES } from 'constants';
+
+import { useNavigate } from 'react-router-dom';
 import { SearchInput } from 'ui';
 
 import { VacanciesRequestFilterData } from 'api/types';
@@ -9,12 +12,14 @@ interface Props {
 }
 
 export const SearchBar = ({ disabled, fetchVacancies }: Props) => {
-  const [keyword, setKeywordParam] = useFilterSearchParam('keyword');
+  const navigate = useNavigate();
+  const [keyword] = useFilterSearchParam('keyword');
 
   const handleClick = async (value: string) => {
     if (value !== keyword) {
-      await fetchVacancies({ keyword: value, page: 1 });
-      setKeywordParam(value);
+      navigate(`${ROUTES.main}?keyword=${value}`);
+
+      await fetchVacancies({ keyword: value });
     }
   };
 

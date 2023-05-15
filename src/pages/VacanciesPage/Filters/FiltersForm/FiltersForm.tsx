@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Select from 'react-select';
 import { Button, CustomSelect, Input } from 'ui';
@@ -6,6 +6,7 @@ import { Button, CustomSelect, Input } from 'ui';
 import cls from '../Filters.module.css';
 
 import { VacanciesRequestFilterData } from 'api/types';
+import { useGetFiltersSearchParams } from 'hooks';
 import { FiltersHeader } from 'pages/VacanciesPage/Filters/FiltersForm/FiltersHeader/FiltersHeader';
 import { Option } from 'pages/VacanciesPage/types';
 
@@ -15,6 +16,8 @@ interface Props {
 }
 
 export const FiltersForm = ({ options, clickCallback }: Props) => {
+  const { payment_from, payment_to, catalogues } = useGetFiltersSearchParams();
+
   // @ts-ignore
   const selectRef = useRef<Select<Option>>(null);
   const paymentFromRef = useRef<HTMLInputElement>(null);
@@ -32,7 +35,7 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
     }
 
     const filtersParams: VacanciesRequestFilterData = transformFiltersData({
-      catalogues: catalogValue.value,
+      catalogues: catalogValue?.value || null,
       payment_from: Number(paymentFromValue) || 0,
       payment_to: Number(paymentToValue) || 0,
     });
@@ -45,6 +48,20 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
     paymentFromRef!.current!.value = '';
     paymentToRef!.current!.value = '';
   };
+
+  useEffect(() => {
+    if (!payment_to) {
+      paymentToRef!.current!.value = '';
+    }
+
+    if (!payment_from) {
+      paymentFromRef!.current!.value = '';
+    }
+
+    if (!catalogues) {
+      selectRef.current.clearValue();
+    }
+  }, [payment_to, payment_from, catalogues]);
 
   return (
     <form className={cls.form}>
