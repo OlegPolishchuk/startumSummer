@@ -5,6 +5,6 @@ export { SaveButton } from './SaveButton/SaveButton';
 export { Card } from './Card/Card';
 export { CardList } from './CardList/CardList';
 export { Pagination } from './Pagination/Pagination';
-export { PointerIcon, CloseIcon, SearchIcon } from './Icons';
+export { PointerIcon, CloseIcon, SearchIcon, DotIcon } from './Icons';
 export { Loader } from './Loader/Loader';
 export { CustomSelect } from './CustomSelect/CustomSelect';

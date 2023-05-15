@@ -15,8 +15,6 @@ interface Props {
 export const Card = ({ card, large = false }: Props) => {
   const { currency, payment_to, payment_from, town, type_of_work, profession, id } = card;
 
-  console.log(large);
-
   return (
     <div className={clsx(cls.card, 'wrapper', large && cls.large)}>
       <Header id={id} profession={profession} isFavorite={false} large={large} />

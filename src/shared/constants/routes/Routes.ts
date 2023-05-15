@@ -1,5 +1,5 @@
 export const ROUTES = {
   main: '/',
-  current: 'vacancies',
+  current: '/vacancies',
   favorites: '/favorites',
 };
