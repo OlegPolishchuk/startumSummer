@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import cls from '../Card.module.css';
 
 interface Props {
@@ -5,10 +7,12 @@ interface Props {
   payment_to?: number;
   payment_from?: number;
   type_of_work: string;
+  large?: boolean;
 }
 
 export const Description = ({
   currency,
+  large = false,
   payment_from = 0,
   payment_to = 0,
   type_of_work,
@@ -16,7 +20,7 @@ export const Description = ({
   const payment = createSalaryString(payment_from, payment_to, currency);
 
   return (
-    <div className={cls.description}>
+    <div className={clsx(cls.description, large && cls.description_large)}>
       {!!payment && <p className={cls.salary}>з/п {payment}</p>}
       <p className={cls.dot} />
       <p className={cls.workTime}>{type_of_work}</p>

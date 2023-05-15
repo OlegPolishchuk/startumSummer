@@ -24,8 +24,6 @@ export const Filters = ({ callback }: Props) => {
   const handleFormCallback = (formData: VacanciesRequestFilterData) => {
     const { filters, queryString } = wrapSearchParams(formData);
 
-    console.log('queryString =', queryString);
-    console.log(`currentQueryString =`, currentQueryString);
     if (currentQueryString !== queryString) {
       callback(filters);
     }

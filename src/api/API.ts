@@ -5,6 +5,7 @@ import {
   AuthUserResponse,
   Profession,
   VacanciesRequestFilterData,
+  Vacancy,
   VacancyResponse,
 } from 'api/types';
 
@@ -34,6 +35,10 @@ export const API = {
         count: SearchParams.elementsCount,
       },
     });
+  },
+
+  getCurrentVacancy(id: string) {
+    return instance.get<Vacancy>(`vacancies/${id}`);
   },
 
   getProfessionCatalogues() {

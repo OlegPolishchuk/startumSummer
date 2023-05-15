@@ -19,6 +19,12 @@
   margin-right: auto;
 }
 
+.title_large {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+}
+
 .starButton {
   width: 22px;
   height: 20px;
@@ -38,6 +44,16 @@
 
 .salary {
   font-weight: 600;
+}
+
+
+.description_large {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.description_large .salary {
+  font-weight: 700;
 }
 
 .dot {

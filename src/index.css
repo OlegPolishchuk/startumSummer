@@ -81,4 +81,6 @@ body {
   padding: 20px;
   background-color: var(--bg-color-item);
   border-radius: var(--border-radius-main);
+
+  border: 1px solid var(--color-gray-200);
 }

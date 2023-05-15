@@ -8,7 +8,7 @@ interface Props {
 
 export const FiltersHeader = ({ onResetForm }: Props) => {
   return (
-    <header className={cls.header}>
+    <div className={cls.header}>
       <h3 className={cls.title}>Фильтры</h3>
 
       <Button
@@ -20,6 +20,6 @@ export const FiltersHeader = ({ onResetForm }: Props) => {
         Сбросить все
         <CloseIcon className={cls.resetButtonIcon} />
       </Button>
-    </header>
+    </div>
   );
 };
