@@ -1,3 +1,5 @@
+import { SearchParams } from 'constants';
+
 import { instance } from 'api/instance';
 import {
   AuthUserResponse,
@@ -29,7 +31,7 @@ export const API = {
     return instance.get<VacancyResponse>(`vacancies/`, {
       params: {
         ...filterParams,
-        count: 4,
+        count: SearchParams.elementsCount,
       },
     });
   },

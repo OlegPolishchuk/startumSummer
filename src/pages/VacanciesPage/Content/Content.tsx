@@ -1,3 +1,5 @@
+import { SearchParams } from 'constants';
+
 import { useEffect, useRef } from 'react';
 
 import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
@@ -23,6 +25,8 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
   const [keyword] = useFilterSearchParam('keyword');
 
   const progressRef = useRef<LoadingBarRef>(null);
+
+  const pageCount = Math.ceil(total / SearchParams.elementsCount);
 
   const handleClick = async (nextPage: number) => {
     setPageSearchParams(nextPage);
@@ -50,7 +54,11 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
         <CardList cards={vacancies} isLoading={loading} />
       )}
 
-      <Pagination pageCount={total} currentPage={page - 1} onPageClick={handleClick} />
+      <Pagination
+        pageCount={pageCount}
+        currentPage={page - 1}
+        onPageClick={handleClick}
+      />
     </main>
   );
 };
