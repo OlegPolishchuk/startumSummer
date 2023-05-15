@@ -7,11 +7,18 @@ import { SearchBar } from '../SearchBar/SearchBar';
 
 import cls from './Content.module.css';
 
-import { useFetchVacancies, useFilterSearchParam, usePageSearchParam } from 'hooks';
+import { VacanciesRequestFilterData, Vacancy } from 'api/types';
+import { useFilterSearchParam, usePageSearchParam } from 'hooks';
 import { NoContent } from 'pages/VacanciesPage/Content/NoContent/NoContent';
 
-export const Content = () => {
-  const { fetchVacancies, vacancies, loading, total } = useFetchVacancies();
+interface Props {
+  fetchVacancies: (filterParams: VacanciesRequestFilterData) => Promise<void>;
+  vacancies: Vacancy[];
+  loading: boolean;
+  total: number;
+}
+
+export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) => {
   const { page, setPageSearchParams } = usePageSearchParam();
   const [keyword] = useFilterSearchParam('keyword');
 

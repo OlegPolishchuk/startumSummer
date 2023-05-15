@@ -6,16 +6,19 @@ import cls from './Filters.module.css';
 import { FiltersForm } from './FiltersForm/FiltersForm';
 
 import { API } from 'api/API';
+import { VacanciesRequestFilterData } from 'api/types';
+import { Catalog } from 'pages/VacanciesPage/types';
 
-interface Catalog {
-  value: number;
-  label: string;
+interface Props {
+  callback: (formData: VacanciesRequestFilterData) => void;
 }
 
-export const Filters = () => {
+export const Filters = ({ callback }: Props) => {
   const [catalog, setCatalog] = useState<Catalog[]>([]);
 
-  console.log(catalog);
+  const handleFormCallback = (formData: VacanciesRequestFilterData) => {
+    callback(formData);
+  };
 
   useEffect(() => {
     (async () => {
@@ -32,7 +35,7 @@ export const Filters = () => {
 
   return (
     <div className={clsx('wrapper', cls.filters)}>
-      <FiltersForm options={catalog} />
+      <FiltersForm options={catalog} clickCallback={handleFormCallback} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Select from 'react-select';
 import { Button, CustomSelect, Input } from 'ui';
@@ -6,32 +6,24 @@ import { Button, CustomSelect, Input } from 'ui';
 import cls from '../Filters.module.css';
 
 import { VacanciesRequestFilterData } from 'api/types';
-import { useFetchVacancies } from 'hooks';
 import { FiltersHeader } from 'pages/VacanciesPage/Filters/FiltersForm/FiltersHeader/FiltersHeader';
-
-export interface Option {
-  label: string;
-  value: number;
-}
+import { Option } from 'pages/VacanciesPage/types';
 
 interface Props {
   options: Option[];
+  clickCallback: (formData: VacanciesRequestFilterData) => void;
 }
 
-export const FiltersForm = ({ options }: Props) => {
-  const { fetchVacancies } = useFetchVacancies();
-
-  const [selectOption, setSelectOption] = useState<Option>({} as Option);
-
+export const FiltersForm = ({ options, clickCallback }: Props) => {
   // @ts-ignore
   const selectRef = useRef<Select<Option>>(null);
-
   const paymentFromRef = useRef<HTMLInputElement>(null);
   const paymentToRef = useRef<HTMLInputElement>(null);
 
   const handleSetFilters = () => {
     const paymentFromValue = paymentFromRef.current?.value;
     const paymentToValue = paymentToRef.current?.value;
+    const catalogValue = selectRef.current.getValue()[0];
 
     if (paymentToValue && paymentFromValue) {
       if (Number(paymentToValue) < Number(paymentFromValue)) {
@@ -40,20 +32,16 @@ export const FiltersForm = ({ options }: Props) => {
     }
 
     const filtersParams: VacanciesRequestFilterData = transformFiltersData({
-      catalogues: selectOption.value && (selectOption.value as number),
+      catalogues: catalogValue.value,
       payment_from: Number(paymentFromValue) || 0,
       payment_to: Number(paymentToValue) || 0,
     });
 
-    fetchVacancies(transformFiltersData(filtersParams));
+    clickCallback(transformFiltersData(filtersParams));
   };
 
   const resetFilters = () => {
-    console.log('click');
-
     selectRef.current.clearValue();
-
-    setSelectOption({ label: '', value: 0 });
     paymentFromRef!.current!.value = '';
     paymentToRef!.current!.value = '';
   };
@@ -62,12 +50,7 @@ export const FiltersForm = ({ options }: Props) => {
     <form className={cls.form}>
       <FiltersHeader onResetForm={resetFilters} />
 
-      <CustomSelect
-        ref={selectRef}
-        setState={setSelectOption}
-        label="Отрасль"
-        options={options}
-      />
+      <CustomSelect ref={selectRef} label="Отрасль" options={options} />
 
       <div>
         <Input
