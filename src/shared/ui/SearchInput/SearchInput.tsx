@@ -40,6 +40,7 @@ export const SearchInput = ({
       <SearchIcon className={cls.icon} width={13} height={13} />
 
       <Input
+        data-elem="search-input"
         {...restProps}
         className={clsx(cls.input, className && className)}
         ref={inputRef}
@@ -51,7 +52,12 @@ export const SearchInput = ({
         placeholder="Введите название вакансии"
       />
 
-      <Button size="small" className={cls.button} onClick={handleClick}>
+      <Button
+        size="small"
+        className={cls.button}
+        onClick={handleClick}
+        data-elem="search-button"
+      >
         Search
       </Button>
     </div>

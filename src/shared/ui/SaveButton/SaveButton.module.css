@@ -1,3 +1,9 @@
+.button {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
 .star {
   cursor: pointer;
   stroke: var(--color-gray-500);

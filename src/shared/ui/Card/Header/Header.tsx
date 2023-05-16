@@ -30,7 +30,11 @@ export const Header = ({
         )}
       </h3>
       <div className={cls.starButton}>
-        <SaveButton isActive={isFavorite} onClick={toggleIsFavoriteCallback} />
+        <SaveButton
+          isActive={isFavorite}
+          onClick={toggleIsFavoriteCallback}
+          data-elem={`vacancy-${id}-shortlist-button`}
+        />
       </div>
     </div>
   );

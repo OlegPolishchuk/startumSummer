@@ -19,20 +19,23 @@ export const CustomSelect = forwardRef<Select<Option>, Props>(
       <div className={clsx(cls.wrapper, label && cls.label)}>
         <p className={cls.label}>{label}</p>
 
-        <Select
-          ref={ref}
-          defaultValue={undefined}
-          placeholder="Выберете отрасль"
-          options={options}
-          className={cls.select}
-          classNames={{
-            control: state =>
-              clsx(cls.select_control, state.isFocused && cls.arrowFocused),
-            indicatorSeparator: () => cls.separator,
-            placeholder: () => cls.placeholder,
-            option: state => clsx(cls.option, state.isFocused && cls.option_active),
-          }}
-        />
+        <div data-elem="industry-select">
+          <Select
+            data-elem="industry-select"
+            ref={ref}
+            defaultValue={undefined}
+            placeholder="Выберете отрасль"
+            options={options}
+            className={cls.select}
+            classNames={{
+              control: state =>
+                clsx(cls.select_control, state.isFocused && cls.arrowFocused),
+              indicatorSeparator: () => cls.separator,
+              placeholder: () => cls.placeholder,
+              option: state => clsx(cls.option, state.isFocused && cls.option_active),
+            }}
+          />
+        </div>
       </div>
     );
   },

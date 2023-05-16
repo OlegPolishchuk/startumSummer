@@ -44,7 +44,6 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
   };
 
   const resetFilters = () => {
-    selectRef.current.clearValue();
     paymentFromRef!.current!.value = '';
     paymentToRef!.current!.value = '';
   };
@@ -71,6 +70,7 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
 
       <div className={cls.inputGroup}>
         <Input
+          data-elem="salary-from-input"
           ref={paymentFromRef}
           label="Оклад"
           placeholder="От"
@@ -79,6 +79,7 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
         />
 
         <Input
+          data-elem="salary-to-input"
           ref={paymentToRef}
           placeholder="До"
           type="number"
@@ -86,7 +87,7 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
         />
       </div>
 
-      <Button type="button" full onClick={handleSetFilters}>
+      <Button type="button" full onClick={handleSetFilters} data-elem="search-button">
         Применить
       </Button>
     </form>

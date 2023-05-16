@@ -19,7 +19,10 @@ export const Card = ({ card, large = false }: Props) => {
   const { isFavorite, toggleIsFavorite } = useToggleFavorite(card);
 
   return (
-    <div className={clsx(cls.card, 'wrapper', large && cls.large)}>
+    <div
+      className={clsx(cls.card, 'wrapper', large && cls.large)}
+      data-elem={`vacancy-_vacancy_id_${card.id}`}
+    >
       <Header
         id={id}
         profession={profession}
