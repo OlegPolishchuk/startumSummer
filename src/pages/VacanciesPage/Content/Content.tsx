@@ -57,7 +57,7 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
 
       <Pagination
         pageCount={pageCount}
-        currentPage={page - 1}
+        currentPage={page === 0 ? 0 : page - 1}
         onPageClick={handleClick}
       />
     </main>

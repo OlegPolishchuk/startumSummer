@@ -22,14 +22,12 @@ export const CurrentVacancyPage = () => {
     fetchVacancy(`${id}`);
   }, []);
 
-  console.log(vacancyData);
-
   return (
     <main className={cls.container}>
       {loading && <CardsLoader />}
 
       <div className={clsx(cls.header)}>
-        <Card card={vacancyData} large />
+        <Card card={vacancyData} large key={vacancyData.id} />
       </div>
 
       <div className={clsx(cls.body, 'wrapper')}>{parsedHTML}</div>

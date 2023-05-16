@@ -9,10 +9,17 @@ import cls from '../Card.module.css';
 interface Props {
   profession: string;
   isFavorite: boolean;
+  toggleIsFavoriteCallback: () => void;
   id: number;
   large?: boolean;
 }
-export const Header = ({ id, profession, isFavorite, large = false }: Props) => {
+export const Header = ({
+  id,
+  profession,
+  isFavorite,
+  toggleIsFavoriteCallback,
+  large = false,
+}: Props) => {
   return (
     <div className={cls.header}>
       <h3 className={clsx(cls.title, large && cls.title_large)}>
@@ -23,7 +30,7 @@ export const Header = ({ id, profession, isFavorite, large = false }: Props) => 
         )}
       </h3>
       <div className={cls.starButton}>
-        <SaveButton isActive={isFavorite} />
+        <SaveButton isActive={isFavorite} onClick={toggleIsFavoriteCallback} />
       </div>
     </div>
   );

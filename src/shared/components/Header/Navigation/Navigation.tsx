@@ -10,6 +10,7 @@ export const Navigation = () => {
 
   const isActive = (routesList: string[]) => {
     const pathNameList = location.pathname.split('/');
+
     const parentPath = `/${pathNameList[1]}`;
 
     return routesList.includes(parentPath) ? clsx(cls.link, cls.active) : cls.link;

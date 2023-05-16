@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { App } from '../App';
 
-import { CurrentVacancyPage, VacanciesPage } from 'pages';
+import { CurrentVacancyPage, FavoritesPage, VacanciesPage } from 'pages';
 
 export const appRouter = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: ROUTES.favorites,
-        element: <div>Favorites</div>,
+        element: <FavoritesPage />,
       },
     ],
   },

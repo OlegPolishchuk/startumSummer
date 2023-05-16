@@ -1,11 +1,11 @@
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 
 import { Vacancy } from 'api/types';
 
 export interface ContextData {
   isInitialized: boolean;
   favoriteVacancies: Vacancy[];
-  setFavoritesVacancies: () => void;
+  setFavoritesVacancies: React.Dispatch<React.SetStateAction<Vacancy[]>>;
 }
 export const AppContext = createContext<ContextData>({
   isInitialized: false,
