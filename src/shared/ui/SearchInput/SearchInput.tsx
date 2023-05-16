@@ -37,7 +37,7 @@ export const SearchInput = ({
 
   return (
     <div className={cls.wrapper}>
-      <SearchIcon className={cls.icon} width={13} height={13} />
+      <SearchIcon className={cls.icon} width={15} height={15} />
 
       <Input
         data-elem="search-input"
@@ -58,7 +58,7 @@ export const SearchInput = ({
         onClick={handleClick}
         data-elem="search-button"
       >
-        Search
+        Поиск
       </Button>
     </div>
   );

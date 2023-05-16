@@ -4,7 +4,7 @@
   align-items: center;
   gap: 10px;
 
-  padding: 0 12px;
+  padding: 0 11px;
 
   border-radius: var(--border-radius-second);
   border: 1px solid var(--color-border);
@@ -21,7 +21,7 @@
 }
 
 .input {
-  padding: 14px 0 14px 20px;
+  padding: 14px 0 12px 24px;
   border: 0;
   outline: none;
   background-color: transparent;
@@ -39,7 +39,7 @@
 
 .icon {
   position: absolute;
-  top: 18px;
+  top: 16px;
   left: 12px;
 }
 
