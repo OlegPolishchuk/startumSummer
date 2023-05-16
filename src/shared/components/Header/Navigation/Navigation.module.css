@@ -2,13 +2,20 @@
   flex-grow: 1;
 
   display: flex;
-  justify-content: center;
+  align-items: center;
+}
+
+.links {
+  display: flex;
   gap: 60px;
 }
 
 .link {
   text-decoration: none;
   transition: .2s ease;
+
+  line-height: 20px;
+  font-weight: 500;
 }
 
 .link:hover {

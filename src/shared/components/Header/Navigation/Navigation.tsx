@@ -3,6 +3,8 @@ import { ROUTES } from 'constants';
 import clsx from 'clsx';
 import { NavLink, useLocation } from 'react-router-dom';
 
+import { Logo } from '../Logo/Logo';
+
 import cls from './Navigation.module.css';
 
 export const Navigation = () => {
@@ -18,12 +20,17 @@ export const Navigation = () => {
 
   return (
     <nav className={cls.nav}>
-      <NavLink className={isActive([ROUTES.current, ROUTES.main])} to={ROUTES.main}>
-        Поиск Вакансий
-      </NavLink>
-      <NavLink className={isActive([ROUTES.favorites])} to={ROUTES.favorites}>
-        Избранное
-      </NavLink>
+      <Logo />
+
+      <div className={cls.links}>
+        <NavLink className={isActive([ROUTES.current, ROUTES.main])} to={ROUTES.main}>
+          Поиск Вакансий
+        </NavLink>
+
+        <NavLink className={isActive([ROUTES.favorites])} to={ROUTES.favorites}>
+          Избранное
+        </NavLink>
+      </div>
     </nav>
   );
 };

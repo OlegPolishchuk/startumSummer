@@ -68,6 +68,8 @@ body {
   padding-bottom: 40px;
 
   background-color: var(--bg-bolor-main);
+
+  font-family: 'Inter', sans-serif;
 }
 
 .container {
