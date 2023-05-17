@@ -1,42 +1,54 @@
-import { useEffect, useState } from 'react';
+import { SearchParams } from 'constants';
 
-import { errorSetter } from 'utils';
+import { useContext, useEffect, useState } from 'react';
 
-import { API } from 'api/API';
-import { Vacancy } from 'api/types';
+import { getPageCount } from 'utils';
+
+import { FavoritesContext } from 'context';
+import { usePageSearchParam } from 'hooks';
 import { localStorageService } from 'services';
 
-interface Result {
-  vacancies: Vacancy[];
-  error: any;
-  loading: boolean;
-}
+const TIMEOUT = 500;
+
 export const useFetchFavorites = () => {
-  const [result, setResult] = useState<Result>({
-    vacancies: [],
-    error: null,
-    loading: true,
-  });
+  const { favoriteVacancies, setFavoriteVacancies } = useContext(FavoritesContext);
+  const { page } = usePageSearchParam();
 
-  const fetchFavoritesVacancies = async () => {
-    try {
-      const favoritesId = localStorageService.getFavoriteVacancies();
+  const [pageCount, setPageCount] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-      const promises = favoritesId.map(id => API.getCurrentVacancy(`${id}`));
-      const res = await Promise.all(promises);
-      const vacancies: Vacancy[] = res.map(response => response.data);
+  const { elementsCount } = SearchParams;
 
-      setResult(prevState => ({ ...prevState, vacancies, loading: false }));
-    } catch (e) {
-      errorSetter(setResult, e);
-    }
+  const fetchFavoriteVacancies = () => {
+    const favorites = localStorageService.getFavoriteVacancies();
+
+    const startIndex = +page * elementsCount - elementsCount;
+    const endIndex = +page * elementsCount;
+    const vacanciesChunk = favorites.slice(startIndex, endIndex);
+
+    setFavoriteVacancies(vacanciesChunk);
+
+    setPageCount(
+      getPageCount({
+        total: favorites.length,
+        elementsOnPage: SearchParams.elementsCount,
+      }),
+    );
   };
 
   useEffect(() => {
-    fetchFavoritesVacancies();
-  }, []);
+    setLoading(true);
+    fetchFavoriteVacancies();
 
-  const { vacancies, loading, error } = result;
+    setTimeout(() => {
+      setLoading(false);
+    }, TIMEOUT);
+  }, [page]);
 
-  return { vacancies, loading, error, fetchFavoritesVacancies };
+  return {
+    favoriteVacancies,
+    pageCount,
+    setPageCount,
+    loading,
+  };
 };

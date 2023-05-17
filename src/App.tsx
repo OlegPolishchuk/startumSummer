@@ -4,29 +4,34 @@ import { Error, GlobalLoader, Header } from 'components';
 import { Outlet } from 'react-router-dom';
 
 import { Vacancy } from 'api/types';
-import { AppContext } from 'context';
+import { FavoriteContextData, FavoritesContext } from 'context/FavoritesContext';
 import { useInitializeApp } from 'hooks';
 
 export const App = () => {
-  const { loading, error, isInitialized, favoriteVacancies } = useInitializeApp();
-  const [favorites, setFavorites] = useState<Vacancy[]>(favoriteVacancies);
+  const { loading, error } = useInitializeApp();
+  const [favorites, setFavorites] = useState<Vacancy[]>([]);
 
-  const contextData = useMemo(
+  const contextValue: FavoriteContextData = useMemo(
     () => ({
-      isInitialized,
       favoriteVacancies: favorites,
-      setFavoritesVacancies: setFavorites,
+      setFavoriteVacancies: setFavorites,
     }),
-    [isInitialized, favorites],
+    [favorites],
   );
 
   return (
-    <AppContext.Provider value={contextData}>
-      {loading && <GlobalLoader />}
-
+    <>
       <Header />
 
-      {error ? <Error error={error && error} /> : <Outlet />}
-    </AppContext.Provider>
+      {loading && <GlobalLoader />}
+      {error ? (
+        <Error error={error && error} />
+      ) : (
+        <FavoritesContext.Provider value={contextValue}>
+          <Outlet />
+        </FavoritesContext.Provider>
+        // <Outlet />
+      )}
+    </>
   );
 };

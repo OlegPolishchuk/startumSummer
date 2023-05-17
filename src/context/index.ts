@@ -1,2 +1,2 @@
-export { AppContext } from 'context/AppContext';
-export type { ContextData } from 'context/AppContext';
+export { FavoritesContext } from 'context/FavoritesContext';
+export type { ContextData } from 'context/FavoritesContext';

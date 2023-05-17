@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
 
 import { API } from 'api/API';
-import { Vacancy } from 'api/types';
 import { localStorageService } from 'services';
 
 interface Data {
   loading: boolean;
   isInitialized: boolean;
   error: any;
-  favoriteVacancies: Vacancy[];
+  // favoriteVacancies: Vacancy[];
 }
 export const useInitializeApp = () => {
   const [data, setData] = useState<Data>({
     loading: true,
     isInitialized: false,
     error: null,
-    favoriteVacancies: [],
   });
 
   useEffect(() => {
     const isUserAuth = localStorageService.getAuthData();
-    const favoriteVacancies = localStorageService.getFavoriteVacancies();
 
     (async () => {
       if (!isUserAuth) {
@@ -42,7 +39,6 @@ export const useInitializeApp = () => {
         ...prevState,
         loading: false,
         isInitialized: true,
-        favoriteVacancies,
       }));
     })();
   }, []);
@@ -51,6 +47,5 @@ export const useInitializeApp = () => {
     loading: data.loading,
     isInitialized: data.isInitialized,
     error: data.error,
-    favoriteVacancies: data.favoriteVacancies,
   };
 };
