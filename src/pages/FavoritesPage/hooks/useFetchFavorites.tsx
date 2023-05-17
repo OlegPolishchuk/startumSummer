@@ -14,8 +14,11 @@ export const useFetchFavorites = () => {
   const { favoriteVacancies, setFavoriteVacancies } = useContext(FavoritesContext);
   const { page, setPageSearchParams } = usePageSearchParam();
 
-  const [pageCount, setPageCount] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({
+    pageCount: 1,
+    loading: true,
+    isVacancyInAction: false,
+  });
 
   const { elementsCount } = SearchParams;
 
@@ -26,42 +29,44 @@ export const useFetchFavorites = () => {
     const endIndex = +page * elementsCount;
     const vacanciesChunk = favorites.slice(startIndex, endIndex);
 
-    console.log(`startIndex =`, startIndex);
-    console.log(`endIndex =`, endIndex);
-    console.log(`vacanciesChunk =`, vacanciesChunk);
-    console.log(`page =`, page);
-
     if (vacanciesChunk.length === 0 && page !== 1) {
       setPageSearchParams(page - 1);
     }
 
     setFavoriteVacancies(vacanciesChunk);
 
-    setPageCount(
-      getPageCount({
-        total: favorites.length,
-        elementsOnPage: SearchParams.elementsCount,
-      }),
-    );
+    const pageCount = getPageCount({
+      total: favorites.length,
+      elementsOnPage: SearchParams.elementsCount,
+    });
+
+    setData(prevState => ({ ...prevState, pageCount }));
   };
 
   useEffect(() => {
-    setLoading(true);
+    setData(prevState => ({ ...prevState, loading: true }));
     fetchFavoriteVacancies();
 
     setTimeout(() => {
-      setLoading(false);
+      setData(prevState => ({ ...prevState, loading: false }));
     }, TIMEOUT);
   }, [page]);
 
   useEffect(() => {
+    setData(prevState => ({ ...prevState, isVacancyInAction: true }));
     fetchFavoriteVacancies();
+
+    setTimeout(() => {
+      setData(prevState => ({ ...prevState, isVacancyInAction: false }));
+    }, TIMEOUT);
   }, [favoriteVacancies.length]);
+
+  const { isVacancyInAction, loading, pageCount } = data;
 
   return {
     favoriteVacancies,
     pageCount,
-    setPageCount,
     loading,
+    isVacancyInAction,
   };
 };

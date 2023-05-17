@@ -1,9 +1,8 @@
 import { SearchParams } from 'constants';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
-import { CardList, Pagination } from 'ui';
+import { CardList, LinearLoadingBar, Pagination } from 'ui';
 import { getPageCount } from 'utils';
 
 import { SearchBar } from '../SearchBar/SearchBar';
@@ -26,16 +25,12 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
 
   const { page, setPageSearchParams } = usePageSearchParam();
 
-  const progressRef = useRef<LoadingBarRef>(null);
-
   const pageCount = getPageCount({ total, elementsOnPage: SearchParams.elementsCount });
 
   const handleClick = async (nextPage: number) => {
     setPageSearchParams(nextPage);
-    progressRef.current?.continuousStart();
 
     await fetchVacancies({ page: nextPage });
-    progressRef?.current?.complete();
   };
 
   useEffect(() => {
@@ -46,8 +41,7 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
 
   return (
     <main className={cls.main}>
-      <LoadingBar color="#5E96FC" ref={progressRef} />
-
+      <LinearLoadingBar loading={loading} />
       <SearchBar disabled={loading} fetchVacancies={fetchVacancies} />
 
       {vacancies.length === 0 && !loading ? (

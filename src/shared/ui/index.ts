@@ -8,3 +8,4 @@ export { Pagination } from './Pagination/Pagination';
 export { PointerIcon, CloseIcon, SearchIcon, DotIcon } from './Icons';
 export { Loader } from './Loader/Loader';
 export { CustomSelect } from './CustomSelect/CustomSelect';
+export { LinearLoadingBar } from './LinearLoadingBar/LinearLoadingBar';
