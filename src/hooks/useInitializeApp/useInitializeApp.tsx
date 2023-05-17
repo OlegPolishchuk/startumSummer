@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 
 import { API } from 'api/API';
+import { Profession } from 'api/types';
 import { localStorageService } from 'services';
 
 interface Data {
   loading: boolean;
   isInitialized: boolean;
   error: any;
-  // favoriteVacancies: Vacancy[];
+  professionList: Profession[];
 }
 export const useInitializeApp = () => {
   const [data, setData] = useState<Data>({
     loading: true,
     isInitialized: false,
     error: null,
+    professionList: [],
   });
 
   useEffect(() => {
@@ -35,17 +37,19 @@ export const useInitializeApp = () => {
         }
       }
 
+      const res = await API.getProfessionCatalogues();
+      const professionList = res.data;
+
+      // setData(prevState => ({ ...prevState,  }));
+
       setData(prevState => ({
         ...prevState,
+        professionList,
         loading: false,
         isInitialized: true,
       }));
     })();
   }, []);
 
-  return {
-    loading: data.loading,
-    isInitialized: data.isInitialized,
-    error: data.error,
-  };
+  return { ...data };
 };

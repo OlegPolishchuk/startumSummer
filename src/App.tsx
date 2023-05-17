@@ -1,10 +1,10 @@
-import { ContextWrapper, Error, GlobalLoader, Header } from 'components';
+import { Error, GlobalLoader, Header, ProfessionContext } from 'components';
 import { Outlet } from 'react-router-dom';
 
 import { useInitializeApp } from 'hooks';
 
 export const App = () => {
-  const { loading, error } = useInitializeApp();
+  const { loading, error, professionList } = useInitializeApp();
 
   return (
     <>
@@ -14,9 +14,9 @@ export const App = () => {
       {error ? (
         <Error error={error && error} />
       ) : (
-        <ContextWrapper>
+        <ProfessionContext professionList={professionList}>
           <Outlet />
-        </ContextWrapper>
+        </ProfessionContext>
       )}
     </>
   );

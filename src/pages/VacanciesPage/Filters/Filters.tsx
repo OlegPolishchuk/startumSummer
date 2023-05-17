@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
@@ -6,8 +6,8 @@ import { useLocation } from 'react-router-dom';
 import cls from './Filters.module.css';
 import { FiltersForm } from './FiltersForm/FiltersForm';
 
-import { API } from 'api/API';
 import { VacanciesRequestFilterData } from 'api/types';
+import { Professions } from 'context/ProfessionContext';
 import { useWrapSearchParams } from 'hooks';
 import { Catalog } from 'pages/VacanciesPage/types';
 
@@ -16,6 +16,8 @@ interface Props {
 }
 
 export const Filters = ({ callback }: Props) => {
+  const { professionList } = useContext(Professions);
+
   const [catalog, setCatalog] = useState<Catalog[]>([]);
   const wrapSearchParams = useWrapSearchParams();
 
@@ -30,17 +32,13 @@ export const Filters = ({ callback }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      const res = await API.getProfessionCatalogues();
+    const data = professionList.map(profession => ({
+      value: profession.key,
+      label: profession.title_trimmed,
+    }));
 
-      const data = res.data.map(item => ({
-        value: item.key,
-        label: item.title_trimmed,
-      }));
-
-      setCatalog(data);
-    })();
-  }, []);
+    setCatalog(data);
+  }, [professionList]);
 
   return (
     <div className={clsx('wrapper', cls.filters)}>
