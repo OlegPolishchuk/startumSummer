@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 104px;
+  gap: 25px;
 
   width: 95%;
   max-width: 773px;
