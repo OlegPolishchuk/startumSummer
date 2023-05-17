@@ -5,7 +5,7 @@ import { FavoritesContext } from 'context';
 import { localStorageService } from 'services';
 
 export const useToggleFavorite = (vacancy: Vacancy) => {
-  const { favoriteVacancies, setFavoriteVacancies } = useContext(FavoritesContext);
+  const { setFavoriteVacancies } = useContext(FavoritesContext);
 
   const [isCurrentVacancyFavorite, setIsCurrentVacancyFavorite] = useState(false);
 
@@ -22,7 +22,7 @@ export const useToggleFavorite = (vacancy: Vacancy) => {
     if (isCurrentVacancyFavorite) {
       removeFromFavorites(vacancy.id);
 
-      setFavoriteVacancies(
+      setFavoriteVacancies(favoriteVacancies =>
         favoriteVacancies.filter(fVacancy => fVacancy.id !== vacancy.id),
       );
     }
@@ -36,7 +36,6 @@ export const useToggleFavorite = (vacancy: Vacancy) => {
       favoriteVacancies.findIndex(fVacancy => fVacancy.id === vacancy.id) !== -1;
 
     setIsCurrentVacancyFavorite(isFavorite);
-    // setFavoriteVacancies(favoriteVacancies);
   }, []);
 
   return { isFavorite: isCurrentVacancyFavorite, toggleIsFavorite };
