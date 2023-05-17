@@ -17,6 +17,7 @@
   --color-gray-300: #D5D6DC;
   --color-gray-500: #ACADB9;
   --color-gray-600: #7B7C88;
+  --color-gray-900: #343A40;
 
 
   --color-theme: var(--color-blue-500);
@@ -65,12 +66,10 @@ ul { list-style: none }
 
 #root {
   min-height: 100vh;
+  padding-bottom: 40px;
 }
 
 body {
-  min-height: 100vh;
-  padding-bottom: 40px;
-
   background-color: var(--bg-bolor-main);
 
   font-family: 'Inter', sans-serif;

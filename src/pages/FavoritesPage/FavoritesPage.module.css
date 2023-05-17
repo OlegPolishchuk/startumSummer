@@ -9,3 +9,18 @@
 
   position: relative;
 }
+
+.noContentLink {
+  padding: 9.5px 24px;
+
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+
+  color: var(--color-blue-600);
+  background-color: var(--color-blue-100);
+
+  border-radius: var(--border-radius-second);
+
+  text-decoration: none;
+}

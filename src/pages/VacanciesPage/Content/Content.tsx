@@ -2,6 +2,7 @@ import { SearchParams } from 'constants';
 
 import { useEffect } from 'react';
 
+import { NoContent } from 'components';
 import { CardList, LinearLoadingBar, Pagination } from 'ui';
 import { getPageCount } from 'utils';
 
@@ -11,7 +12,6 @@ import cls from './Content.module.css';
 
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
 import { useGetFiltersSearchParams, usePageSearchParam } from 'hooks';
-import { NoContent } from 'pages/VacanciesPage/Content/NoContent/NoContent';
 
 interface Props {
   fetchVacancies: (filterParams: VacanciesRequestFilterData) => Promise<void>;

@@ -31,6 +31,13 @@
   color: var(--color-theme);
 }
 
+@media (max-width: 992px) {
+  .links {
+    flex-grow: 1;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .nav {
     gap: 20px;
