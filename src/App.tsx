@@ -1,5 +1,3 @@
-import './App.css';
-
 import { useMemo, useState } from 'react';
 
 import { Error, GlobalLoader, Header } from 'components';

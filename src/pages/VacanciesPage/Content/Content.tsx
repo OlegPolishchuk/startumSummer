@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 import { CardList, Pagination } from 'ui';
+import { getPageCount } from 'utils';
 
 import { SearchBar } from '../SearchBar/SearchBar';
 
@@ -27,7 +28,7 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
 
   const progressRef = useRef<LoadingBarRef>(null);
 
-  const pageCount = Math.ceil(total / SearchParams.elementsCount);
+  const pageCount = getPageCount({ total, elementsOnPage: SearchParams.elementsCount });
 
   const handleClick = async (nextPage: number) => {
     setPageSearchParams(nextPage);

@@ -35,7 +35,7 @@ export const Pagination = ({ pageCount, currentPage, onPageClick }: Props) => {
       nextLabel={<span>&#8250;</span>}
       renderOnZeroPageCount={null}
       pageRangeDisplayed={3}
-      marginPagesDisplayed={0}
+      marginPagesDisplayed={1}
       prevPageRel={currentPage === 0 ? null : 'prev'}
       forcePage={currentPage}
       pageCount={pageCount}

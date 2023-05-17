@@ -39,13 +39,11 @@
 
 
 .disabled {
-  /*pointer-events: none;*/
-
   border-color: var(--color-gray-200);
   color: var(--color-gray-200);
   cursor: not-allowed;
 }
 
 .disabled:hover {
-  border-color: var(--color-gray-500);
+  border-color: var(--color-gray-200);
 }
