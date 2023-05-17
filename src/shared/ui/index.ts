@@ -3,7 +3,7 @@ export { Input } from './Input/Input';
 export { SearchInput } from './SearchInput/SearchInput';
 export { SaveButton } from './SaveButton/SaveButton';
 export { Card } from './Card/Card';
-export { CardList } from './CardList/CardList';
+export { CardList } from '../components/CardList/CardList';
 export { Pagination } from './Pagination/Pagination';
 export { PointerIcon, CloseIcon, SearchIcon, DotIcon } from './Icons';
 export { Loader } from './Loader/Loader';

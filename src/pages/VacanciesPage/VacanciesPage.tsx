@@ -2,9 +2,8 @@ import clsx from 'clsx';
 
 import { Content } from './Content/Content';
 import { Filters } from './Filters/Filters';
+import { useFetchVacancies } from './hooks';
 import cls from './VacanciesPage.module.css';
-
-import { useFetchVacancies } from 'hooks';
 
 export const VacanciesPage = () => {
   const vacanciesData = useFetchVacancies();

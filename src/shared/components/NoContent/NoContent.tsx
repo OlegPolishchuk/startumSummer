@@ -10,7 +10,7 @@ export const NoContent = ({ children }: Props) => {
     <div className={cls.container}>
       <img
         className={cls.picture}
-        src="public/images/nocontent_bg.png"
+        src="/images/nocontent_bg.png"
         alt="there is no content on this page"
       />
       <h2 className={cls.title}>Упс, здесь еще ничего нет!</h2>

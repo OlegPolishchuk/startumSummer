@@ -9,8 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Card } from 'ui';
 
 import cls from './CurrentVacancy.module.css';
-
-import { useFetchCurrentVacancy } from 'hooks';
+import { useFetchCurrentVacancy } from './hooks';
 
 export const CurrentVacancyPage = () => {
   const { vacancyData, fetchVacancy, loading } = useFetchCurrentVacancy();

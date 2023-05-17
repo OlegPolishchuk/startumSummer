@@ -1,0 +1,1 @@
+export { useFetchCurrentVacancy } from './useFetchCurrentVacancy';
