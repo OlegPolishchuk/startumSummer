@@ -1,6 +1,6 @@
 import { SearchParams } from 'constants';
 
-import { useEffect } from 'react';
+import React from 'react';
 
 import { NoContent } from 'components';
 import { CardList, LinearLoadingBar, Pagination } from 'ui';
@@ -11,18 +11,23 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import cls from './Content.module.css';
 
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
-import { useGetFiltersSearchParams, usePageSearchParam } from 'hooks';
+import { usePageSearchParam } from 'hooks';
 
 interface Props {
   fetchVacancies: (filterParams: VacanciesRequestFilterData) => Promise<void>;
   vacancies: Vacancy[];
   loading: boolean;
   total: number;
+  setFilters: React.Dispatch<React.SetStateAction<VacanciesRequestFilterData>>;
 }
 
-export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) => {
-  const searchFiltersParams = useGetFiltersSearchParams();
-
+export const Content = ({
+  loading,
+  total,
+  vacancies,
+  fetchVacancies,
+  setFilters,
+}: Props) => {
   const { page, setPageSearchParams } = usePageSearchParam();
 
   const pageCount = getPageCount({ total, elementsOnPage: SearchParams.elementsCount });
@@ -33,16 +38,14 @@ export const Content = ({ loading, total, vacancies, fetchVacancies }: Props) =>
     await fetchVacancies({ page: nextPage });
   };
 
-  useEffect(() => {
-    (async () => {
-      await fetchVacancies({ ...searchFiltersParams });
-    })();
-  }, []);
-
   return (
     <main className={cls.main}>
       <LinearLoadingBar loading={loading} />
-      <SearchBar disabled={loading} fetchVacancies={fetchVacancies} />
+      <SearchBar
+        disabled={loading}
+        fetchVacancies={fetchVacancies}
+        setFilters={setFilters}
+      />
 
       {vacancies.length === 0 && !loading ? (
         <NoContent />

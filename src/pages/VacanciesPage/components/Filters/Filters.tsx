@@ -1,7 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { ROUTES } from 'constants';
+
+import React, { useContext, useEffect, useState } from 'react';
 
 import clsx from 'clsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { Catalog } from '../../types';
 
 import cls from './Filters.module.css';
 import { FiltersForm } from './FiltersForm/FiltersForm';
@@ -9,14 +13,15 @@ import { FiltersForm } from './FiltersForm/FiltersForm';
 import { VacanciesRequestFilterData } from 'api/types';
 import { Professions } from 'context/ProfessionContext';
 import { useWrapSearchParams } from 'hooks';
-import { Catalog } from 'pages/VacanciesPage/types';
 
 interface Props {
   callback: (formData: VacanciesRequestFilterData) => void;
+  setFilters: React.Dispatch<React.SetStateAction<VacanciesRequestFilterData>>;
 }
 
-export const Filters = ({ callback }: Props) => {
+export const Filters = ({ callback, setFilters }: Props) => {
   const { professionList } = useContext(Professions);
+  const navigate = useNavigate();
 
   const [catalog, setCatalog] = useState<Catalog[]>([]);
   const wrapSearchParams = useWrapSearchParams();
@@ -27,6 +32,7 @@ export const Filters = ({ callback }: Props) => {
     const { filters, queryString } = wrapSearchParams(formData);
 
     if (currentQueryString !== queryString) {
+      navigate(ROUTES.main + queryString);
       callback(filters);
     }
   };
@@ -42,7 +48,11 @@ export const Filters = ({ callback }: Props) => {
 
   return (
     <div className={clsx('wrapper', cls.filters)}>
-      <FiltersForm options={catalog} clickCallback={handleFormCallback} />
+      <FiltersForm
+        options={catalog}
+        clickCallback={handleFormCallback}
+        setFilters={setFilters}
+      />
     </div>
   );
 };

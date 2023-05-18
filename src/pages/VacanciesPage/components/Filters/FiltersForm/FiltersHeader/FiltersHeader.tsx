@@ -1,6 +1,6 @@
 import { Button, CloseIcon } from 'ui';
 
-import cls from 'pages/VacanciesPage/Filters/Filters.module.css';
+import cls from '../../Filters.module.css';
 
 interface Props {
   onResetForm: () => void;

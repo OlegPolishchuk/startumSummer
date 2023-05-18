@@ -4,3 +4,4 @@ export { Error } from './Error/Error';
 export { CardsLoader } from './CardsLoader/CardsLoader';
 export { FavoritesVacanciesContext, ProfessionContext } from './Contexts';
 export { NoContent } from './NoContent/NoContent';
+export { PaymentInput } from './PaymentInput/PaymentInput';

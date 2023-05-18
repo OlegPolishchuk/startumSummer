@@ -31,6 +31,7 @@ export const API = {
   getVacancies(filterParams: VacanciesRequestFilterData) {
     return instance.get<VacancyResponse>(`vacancies/`, {
       params: {
+        published: 1,
         ...filterParams,
         count: SearchParams.elementsCount,
       },

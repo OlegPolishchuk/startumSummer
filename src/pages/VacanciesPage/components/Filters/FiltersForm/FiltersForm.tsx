@@ -1,21 +1,25 @@
-import { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
+import { PaymentInput } from 'components';
 import Select from 'react-select';
-import { Button, CustomSelect, Input } from 'ui';
+import { Button, CustomSelect } from 'ui';
 
 import cls from '../Filters.module.css';
 
+import { FiltersHeader } from './FiltersHeader/FiltersHeader';
+
 import { VacanciesRequestFilterData } from 'api/types';
 import { useGetFiltersSearchParams } from 'hooks';
-import { FiltersHeader } from 'pages/VacanciesPage/Filters/FiltersForm/FiltersHeader/FiltersHeader';
 import { Option } from 'pages/VacanciesPage/types';
+import { transformFiltersData } from 'pages/VacanciesPage/utils';
 
 interface Props {
   options: Option[];
   clickCallback: (formData: VacanciesRequestFilterData) => void;
+  setFilters: React.Dispatch<React.SetStateAction<VacanciesRequestFilterData>>;
 }
 
-export const FiltersForm = ({ options, clickCallback }: Props) => {
+export const FiltersForm = ({ options, clickCallback, setFilters }: Props) => {
   const { payment_from, payment_to, catalogues } = useGetFiltersSearchParams();
 
   // @ts-ignore
@@ -44,46 +48,47 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
   };
 
   const resetFilters = () => {
+    setFilters(state => ({
+      ...state,
+      catalogues: undefined,
+      payment_to: 0,
+      payment_from: 0,
+    }));
+
     paymentFromRef!.current!.value = '';
     paymentToRef!.current!.value = '';
+    selectRef.current.clearValue();
   };
-
-  useEffect(() => {
-    if (!payment_to) {
-      paymentToRef!.current!.value = '';
-    }
-
-    if (!payment_from) {
-      paymentFromRef!.current!.value = '';
-    }
-
-    if (!catalogues) {
-      selectRef.current.clearValue();
-    }
-  }, [payment_to, payment_from, catalogues]);
 
   return (
     <form className={cls.form}>
       <FiltersHeader onResetForm={resetFilters} />
 
-      <CustomSelect ref={selectRef} label="Отрасль" options={options} />
+      <CustomSelect
+        ref={selectRef}
+        label="Отрасль"
+        options={options}
+        defaultValueKey={catalogues}
+        setFilters={setFilters}
+      />
 
       <div className={cls.inputGroup}>
-        <Input
-          data-elem="salary-from-input"
+        <PaymentInput
           ref={paymentFromRef}
-          label="Оклад"
+          defaultValue={payment_from || 0}
           placeholder="От"
-          type="number"
-          min={0}
+          dataAttr="salary-from-input"
+          setFilters={setFilters}
+          stateProperty="payment_from"
         />
 
-        <Input
-          data-elem="salary-to-input"
+        <PaymentInput
           ref={paymentToRef}
+          defaultValue={payment_to || 0}
           placeholder="До"
-          type="number"
-          min={paymentFromRef?.current?.value}
+          dataAttr="salary-to-input"
+          setFilters={setFilters}
+          stateProperty="payment_to"
         />
       </div>
 
@@ -93,23 +98,3 @@ export const FiltersForm = ({ options, clickCallback }: Props) => {
     </form>
   );
 };
-
-function transformFiltersData(params: VacanciesRequestFilterData) {
-  const filtersCopy = { ...params };
-
-  let key: keyof typeof filtersCopy;
-
-  for (key in filtersCopy) {
-    if (!filtersCopy[key]) {
-      delete filtersCopy[key];
-    }
-  }
-
-  const { payment_from: from, payment_to: to } = filtersCopy;
-
-  if (from && to) {
-    filtersCopy.payment_to = to < from ? from : to;
-  }
-
-  return filtersCopy;
-}

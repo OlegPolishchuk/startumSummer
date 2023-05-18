@@ -16,6 +16,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       type,
       onChange,
       placeholder,
+      value,
       onKeyDown,
       ...restProps
     }: Props,
@@ -28,6 +29,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         <input
           ref={ref}
           type={type}
+          value={value}
           disabled={disabled}
           onChange={onChange}
           onKeyDown={onKeyDown}

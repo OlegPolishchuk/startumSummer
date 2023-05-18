@@ -1,32 +1,38 @@
-import { ComponentPropsWithRef, KeyboardEvent, ReactNode, useRef } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 import { Button, Input, SearchIcon } from 'ui';
 
 import cls from './SearcInput.module.css';
 
-interface Props extends ComponentPropsWithRef<'input'> {
-  children?: ReactNode;
+import { VacanciesRequestFilterData } from 'api/types';
+import { useDebounce } from 'hooks';
+
+interface Props {
+  value: string;
   clickCallback: (value: string) => void;
+  setFilters: React.Dispatch<React.SetStateAction<VacanciesRequestFilterData>>;
+  className?: string;
+  disabled?: boolean;
 }
 export const SearchInput = ({
   className,
   disabled,
   value,
-  defaultValue,
+  setFilters,
   clickCallback,
-  ...restProps
 }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState(value);
+  const debouncedValue = useDebounce<string>(inputValue);
 
   const handleClick = () => {
-    const inputValue = inputRef.current!.value.trim();
+    if (inputValue.trim()) {
+      clickCallback(inputValue);
 
-    clickCallback(inputValue);
-
-    if (!inputValue) {
-      inputRef.current!.value = '';
+      return;
     }
+
+    setInputValue('');
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -35,18 +41,24 @@ export const SearchInput = ({
     }
   };
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  useEffect(() => {
+    setFilters(state => ({ ...state, keyword: debouncedValue }));
+  }, [debouncedValue]);
+
   return (
     <div className={cls.wrapper}>
       <SearchIcon className={cls.icon} width={15} height={15} />
 
       <Input
         data-elem="search-input"
-        {...restProps}
         className={clsx(cls.input, className && className)}
-        ref={inputRef}
-        value={value}
+        value={inputValue}
+        onChange={handleInputChange}
         disabled={disabled}
-        defaultValue={defaultValue}
         type="text"
         onKeyDown={handleKeyDown}
         placeholder="Введите название вакансии"

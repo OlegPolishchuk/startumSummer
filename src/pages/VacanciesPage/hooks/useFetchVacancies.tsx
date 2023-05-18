@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { errorSetter } from 'utils';
 
 import { API } from 'api/API';
 import { VacanciesRequestFilterData, Vacancy } from 'api/types';
+import { useGetFiltersSearchParams } from 'hooks';
 
 interface Data {
   vacanciesData: {
@@ -14,6 +15,8 @@ interface Data {
   error: any;
 }
 export const useFetchVacancies = () => {
+  const searchFiltersParams = useGetFiltersSearchParams();
+
   const [data, setData] = useState<Data>({
     vacanciesData: { total: 0, vacancies: [] },
     loading: true,
@@ -35,6 +38,12 @@ export const useFetchVacancies = () => {
       errorSetter(setData, e);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      await fetchVacancies({ ...searchFiltersParams });
+    })();
+  }, []);
 
   const { vacanciesData, error, loading } = data;
 
