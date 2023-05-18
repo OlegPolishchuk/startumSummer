@@ -23,6 +23,14 @@ export const appRouter = createBrowserRouter([
         path: ROUTES.favorites,
         element: <FavoritesPage />,
       },
+      {
+        path: '*',
+        element: <VacanciesPage />,
+      },
     ],
+  },
+  {
+    path: '*',
+    element: <App />,
   },
 ]);

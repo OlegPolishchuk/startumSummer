@@ -40,8 +40,6 @@ export const useInitializeApp = () => {
       const res = await API.getProfessionCatalogues();
       const professionList = res.data;
 
-      // setData(prevState => ({ ...prevState,  }));
-
       setData(prevState => ({
         ...prevState,
         professionList,
