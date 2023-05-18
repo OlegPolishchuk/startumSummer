@@ -1,4 +1,4 @@
-# News app
+# Startup Summer 2023
 
 приложение для поиска и управления вакансиями и в соответствии с дизайном.
 [ссылка на дизайн](https://www.figma.com/file/HxEJ0c4CEEuh1fSBfX3w8I/Job-Search-App?type=design&node-id=62-491&t=ecuiUdvKkANKCxj6-0).
